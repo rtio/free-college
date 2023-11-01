@@ -2,7 +2,6 @@ const express = require('express')
 const app = express()
 const carrosRouter = require('./routes/carros')
 const pessoasRouter = require('./routes/pessoas')
-const lightning = require('@rtio/lightning-image')
 const port = 3000
 
 app.use(express.json());
