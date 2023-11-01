@@ -1,0 +1,12 @@
+{
+	"scripts": {
+		"dev": "nodemon --inspect ./app.js"
+	},
+	"devDependencies": {
+		"nodemon": "^3.0.1",
+		"@rtio/lightning-image": "github.com:rtio/lightning-image.git#main"
+	},
+	"dependencies": {
+		"express": "^4.18.2"
+	}
+}
