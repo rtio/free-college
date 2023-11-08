@@ -9,7 +9,7 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
   res.json('Hello World!')
-})
+});
 
 // Prefixo da rota de carros /carros
 app.use('/carros', carrosRouter);
@@ -22,4 +22,4 @@ app.use('/alunos', alunosRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
-})
+});

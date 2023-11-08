@@ -1,6 +1,10 @@
-const { getAlunos, addAluno, getAluno, deleteAluno, editAluno } = require('../repository/alunos-repository');
+const { getAlunos, addAluno, getAluno, deleteAluno, editAluno, getAlunosCursos, getAlunoCursos } = require('../repository/alunos-repository');
 const express = require('express')
 const router = express.Router()
+
+router.get('/cursos', async (req, res) => {
+    res.json(await getAlunosCursos());
+});
 
 // GET /alunos
 // curl --request GET \
@@ -14,12 +18,24 @@ router.get('/', async (req, res) => {
 // curl --request GET \
 //   --url http://localhost:3000/alunos/15 \
 //   --header 'User-Agent: insomnia/8.2.0'
+
+router.get('/:id/cursos', async (req, res) => {
+    const id = req.params.id;
+    const aluno = await getAlunoCursos(id);
+    if (aluno) {
+        res.json(aluno);
+    } else {
+        res.status(404);
+        res.json();
+    }
+});
+
 router.get('/:id', async (req, res) => {
     const id = req.params.id;
     const aluno = await getAluno(id);
     console.log(aluno);
-    if (aluno.length > 0) {
-        res.json(aluno[0]);
+    if (aluno) {
+        res.json(aluno);
     } else {
         res.status(404);
         res.json();

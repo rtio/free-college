@@ -1,11 +1,39 @@
-var conn = require('./conn');
+var { execSql } = require('./conn');
+var { getMatriculasPorAlunoId } = require('./matriculas-repository');
+var { getProfessorPorCurso } = require('./professor-repository');
 
 async function getAlunos() {
     return execSql('SELECT id, nome, email FROM Alunos', []);
 }
 
+async function getAlunosCursos() {
+    const alunos = await execSql('SELECT id, nome FROM Alunos', []);
+    for (const aluno of alunos) {
+        const matriculas = await execSql('SELECT m.id as matricula, c.nome as curso FROM Matriculas as m INNER JOIN Cursos as c ON m.curso_id = c.id WHERE m.aluno_id = ?', [aluno.id]);
+        aluno['matriculas'] = matriculas;
+    }
+    return alunos;
+}
+
+async function getAlunoCursos(id) {
+    const aluno = await getAluno(id);
+    const matriculas = await getMatriculasPorAlunoId(id);
+    const cursos = [];
+    for (const matricula of matriculas) {
+        const professor = await getProfessorPorCurso(matricula.curso_id);
+        cursos.push({
+            id: matricula.matricula,
+            nome: matricula.curso,
+            professor: professor
+        });
+    }
+    aluno['cursos'] = cursos;
+    return aluno;
+}
+
 async function getAluno(id) {
-    return execSql('SELECT id, nome, email FROM Alunos WHERE id = ?', [id]);
+    const result = await execSql('SELECT id, nome, email FROM Alunos WHERE id = ?', [id]);
+    return result[0];
 }
 
 async function addAluno(aluno) {
@@ -36,5 +64,7 @@ module.exports = {
     addAluno,
     getAluno,
     deleteAluno,
-    editAluno
+    editAluno,
+    getAlunosCursos,
+    getAlunoCursos
 }

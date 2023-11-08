@@ -7,4 +7,17 @@ var pool  = mysql.createPool({
   database        : 'Universidade'
 });
 
-exports.connection = pool;
+async function execSql(sql, params) {
+  return new Promise((resolve, reject)=>{
+      pool.query(sql, params, function (error, results, fields) {
+          if (error) {
+              return reject(error);
+          }
+          return resolve(results);
+      });
+  });
+}
+
+module.exports = {
+  execSql
+};
