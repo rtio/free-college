@@ -1,0 +1,94 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Free College",
+    "dateExported": "2023-11-22T22:21:32.183Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "c0fe7d64-bbb8-4c5d-bbc3-54468a16771d",
+            "colId": "ffa56e55-0dac-4f84-ad8e-a9c221a6d7cc",
+            "containerId": "",
+            "name": "{{server}}/alunos/2",
+            "url": "{{server}}/alunos/2",
+            "method": "PUT",
+            "sortNum": 10000,
+            "created": "2023-11-22T22:21:02.241Z",
+            "modified": "2023-11-22T22:21:02.241Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "\t{\n\t\t\"nome\": \"Jack5\",\n\t\t\"email\": \"jack4@mail.com\"\n\t}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "f5b5929c-a801-4f4a-ab20-d84e70ad1f31",
+            "colId": "ffa56e55-0dac-4f84-ad8e-a9c221a6d7cc",
+            "containerId": "",
+            "name": "http://localhost:3000/alunos",
+            "url": "http://localhost:3000/alunos",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-11-22T22:21:08.903Z",
+            "modified": "2023-11-22T22:21:08.903Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n\t\"nome\": \"Jack3\",\n\t\"email\": \"jack@mail.com\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "2ab88a26-48b7-4550-b945-785cd8917e7d",
+            "colId": "ffa56e55-0dac-4f84-ad8e-a9c221a6d7cc",
+            "containerId": "",
+            "name": "http://localhost:3000/alunos",
+            "url": "{{server}}/alunos",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-11-22T22:21:15.082Z",
+            "modified": "2023-11-22T22:21:15.082Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "255a69f7-a291-4147-b510-2a03cfdb1820",
+            "colId": "ffa56e55-0dac-4f84-ad8e-a9c221a6d7cc",
+            "containerId": "",
+            "name": "{{server}}/alunos/2",
+            "url": "{{server}}/alunos/2",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-11-22T22:21:20.167Z",
+            "modified": "2023-11-22T22:21:20.167Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "7e989f45-69ef-4392-8070-e1bae9813ebd",
+            "colId": "ffa56e55-0dac-4f84-ad8e-a9c221a6d7cc",
+            "containerId": "",
+            "name": "{{server}}/alunos/2",
+            "url": "{{server}}/alunos/2",
+            "method": "PUT",
+            "sortNum": 50000,
+            "created": "2023-11-22T22:21:24.818Z",
+            "modified": "2023-11-22T22:21:24.818Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "\t{\n\t\t\"nome\": \"Jack5\",\n\t\t\"email\": \"jack4@mail.com\"\n\t}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}

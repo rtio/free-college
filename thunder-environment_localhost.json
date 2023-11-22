@@ -1,0 +1,24 @@
+{
+    "client": "Thunder Client",
+    "environmentName": "localhost",
+    "dateExported": "2023-11-22T22:22:03.209Z",
+    "version": "1.0",
+    "variables": [
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "port",
+            "value": "3000"
+        },
+        {
+            "name": "protocol",
+            "value": "http"
+        },
+        {
+            "name": "server",
+            "value": "{{protocol}}://{{host}}:{{port}}"
+        }
+    ]
+}
