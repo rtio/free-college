@@ -9,6 +9,7 @@ const sequelize = new Sequelize(
     dialect: 'mariadb'
   }
 );
+
 sequelize.authenticate().then(() => {
   console.log('Connection has been established successfully.');
 }).catch((error) => {
@@ -75,7 +76,6 @@ const Professores = sequelize.define('Professores', {
   timestamps: false,
 });
 
-
 const Salas = sequelize.define('Salas', {
   id: {
     type: DataTypes.INTEGER,
@@ -95,6 +95,7 @@ const Salas = sequelize.define('Salas', {
   tableName: 'Salas',
   timestamps: false,
 });
+
 const Cursos = sequelize.define('Cursos', {
   id: {
     type: DataTypes.INTEGER,
@@ -127,6 +128,7 @@ const Cursos = sequelize.define('Cursos', {
   tableName: 'Cursos',
   timestamps: false,
 });
+
 const Matriculas = sequelize.define('Matriculas', {
   id: {
     type: DataTypes.INTEGER,
