@@ -1,9 +1,9 @@
 const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = new Sequelize(
- 'universidade',
- 'root',
- '1234',
+  'Universidade',
+  'admin',
+  'admin',
   {
     host: 'localhost',
     dialect: 'mariadb'
@@ -16,40 +16,41 @@ sequelize.authenticate().then(() => {
 });
 
 const Alunos = sequelize.define('Alunos', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false,
-    },
-    nome: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-    },
-    email: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-    },
-  }, {
-    tableName: 'Alunos',
-    timestamps: false,
-  });
-  const Departamentos = sequelize.define('Departamentos', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false,
-    },
-    nome: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-    }
-  }, {
-    tableName: 'Departamentos',
-    timestamps: false,
-  });
-  
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false,
+  },
+  nome: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  },
+  email: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  },
+}, {
+  tableName: 'Alunos',
+  timestamps: false,
+});
+
+const Departamentos = sequelize.define('Departamentos', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false,
+  },
+  nome: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  }
+}, {
+  tableName: 'Departamentos',
+  timestamps: false,
+});
+
 const Professores = sequelize.define('Professores', {
   id: {
     type: DataTypes.INTEGER,
@@ -170,18 +171,18 @@ Professores.hasMany(Cursos, { foreignKey: 'professor_id' });
 Cursos.belongsTo(Salas, { foreignKey: 'sala_id' });
 Salas.hasOne(Cursos, { foreignKey: 'sala_id' });
 
-  
-  sequelize.sync().then(() => {
-    console.log(' tables created successfully!');
- }).catch((error) => {
-    console.error('Unable to create table : ', error);
- });
 
- module.exports = {
-    Alunos,
-    Departamentos,
-    Professores,
-    Salas,
-    Cursos,
-    Matriculas
- }
+sequelize.sync().then(() => {
+  console.log(' tables created successfully!');
+}).catch((error) => {
+  console.error('Unable to create table : ', error);
+});
+
+module.exports = {
+  Alunos,
+  Departamentos,
+  Professores,
+  Salas,
+  Cursos,
+  Matriculas
+}
