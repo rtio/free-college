@@ -1,62 +1,74 @@
-var { execSql } = require('./conn');
-var { getMatriculasPorAlunoId } = require('./matriculas-repository');
-var { getProfessorPorCurso } = require('./professor-repository');
+const { Alunos,Cursos } = require('../models/models'); 
 
 async function getAlunos() {
-    return execSql('SELECT id, nome, email FROM Alunos', []);
+    return Alunos.findAll({ attributes: ['id', 'nome', 'email'] });
 }
 
 async function getAlunosCursos() {
-    const alunos = await execSql('SELECT id, nome FROM Alunos', []);
-    for (const aluno of alunos) {
-        const matriculas = await execSql('SELECT m.id as matricula, c.nome as curso FROM Matriculas as m INNER JOIN Cursos as c ON m.curso_id = c.id WHERE m.aluno_id = ?', [aluno.id]);
-        aluno['matriculas'] = matriculas;
+    try {
+      const alunos = await Alunos.findAll({ attributes: ['id', 'nome'] });
+  
+      for (const aluno of alunos) {
+        const matriculas = await aluno.getMatriculas({ include: Cursos });
+        aluno.dataValues.matriculas = matriculas;
+      }
+  
+      return alunos;
+    } catch (error) {
+      throw new Error('Erro ao buscar alunos e cursos: ' + error.message);
     }
-    return alunos;
-}
+  }
 
 async function getAlunoCursos(id) {
-    const aluno = await getAluno(id);
-    const matriculas = await getMatriculasPorAlunoId(id);
-    const cursos = [];
-    for (const matricula of matriculas) {
-        const professor = await getProfessorPorCurso(matricula.curso_id);
-        cursos.push({
-            id: matricula.matricula,
-            nome: matricula.curso,
-            professor: professor
-        });
-    }
-    aluno['cursos'] = cursos;
-    return aluno;
-}
+  try {
+    const aluno = await Alunos.findByPk(id, { attributes: ['id', 'nome'] });
 
+    if (!aluno) {
+      throw new Error('Aluno não encontrado');
+    }
+
+    const matriculas = await aluno.getMatriculas({ include: Cursos });
+    aluno.dataValues.matriculas = matriculas;
+
+    return aluno;
+  } catch (error) {
+    throw new Error('Erro ao buscar aluno e cursos por ID: ' + error.message);
+  }
+}
 async function getAluno(id) {
-    const result = await execSql('SELECT id, nome, email FROM Alunos WHERE id = ?', [id]);
-    return result[0];
+    return Alunos.findByPk(id, { attributes: ['id', 'nome', 'email'] });
 }
 
 async function addAluno(aluno) {
-    return execSql('INSERT INTO Alunos (nome, email) VALUES (?, ?)', [aluno.nome, aluno.email]);
+    try {
+            const newAluno = await Alunos.create({ nome: aluno.nome, email: aluno.email });
+            console.log('New Aluno:', newAluno); // Add this logging statement
+            return newAluno;
+    } catch (error) {
+            console.error('Error creating aluno:', error);
+            throw error; 
+    }
 }
 
+
 async function deleteAluno(id) {
-    return execSql('DELETE FROM Alunos WHERE id = ?', [id]);
+    return Alunos.destroy({ where: { id } });
 }
 
 async function editAluno(aluno) {
-    return execSql('UPDATE Alunos SET nome = ?, email = ? WHERE id = ?', [aluno.nome, aluno.email, aluno.id]);
-}
+    try {
+        const updatedAluno = await Alunos.findByPk(aluno.id);
 
-async function execSql(sql, params) {
-    return new Promise((resolve, reject)=>{
-        conn.connection.query(sql, params, function (error, results, fields) {
-            if (error) {
-                return reject(error);
-            }
-            return resolve(results);
-        });
-    });
+        if (updatedAluno) {
+            updatedAluno.nome = aluno.nome;
+            updatedAluno.email = aluno.email;
+            await updatedAluno.save();
+            return updatedAluno;
+        } 
+    } catch (error) {
+        console.error("Erro ao editar aluno:", error);
+        throw error;
+    }
 }
 
 module.exports = {
@@ -66,5 +78,5 @@ module.exports = {
     deleteAluno,
     editAluno,
     getAlunosCursos,
-    getAlunoCursos
-}
+    getAlunoCursos,
+};

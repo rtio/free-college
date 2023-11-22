@@ -54,10 +54,9 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     const aluno = req.body;
     const result = await addAluno(aluno);
-    const newAluno = await getAluno(result.insertId);
 
     res.status(201);
-    res.json(newAluno[0]);
+    res.json(result);
 });
 
 // DELETE /alunos/:id
@@ -80,11 +79,13 @@ router.delete('/:id', async (req, res) => {
 // 		"email": "jack4@mail.com"
 // 	}'
 router.put('/:id', async (req, res) => {
-    const aluno = req.body;
-    aluno.id = req.params.id;
-    await editAluno(aluno);
-    const editedAluno = await getAluno(aluno.id);
-    res.json(editedAluno);
+        const aluno = req.body;
+        aluno.id = req.params.id;
+
+        const editedAluno = await editAluno(aluno);
+
+        res.json(editedAluno);
+    
 });
 
 module.exports = router;
