@@ -25,7 +25,10 @@ async function getProfessor(id) {
 
 async function addProfessor(professor) {
     try {
-        const newProfessor = await Professores.create({ nome: professor.nome, departamento_id: professor.departamento_id });
+        const newProfessor = await Professores.create({
+            nome: professor.nome,
+            departamento_id: professor.departamento_id 
+        });
         console.log('New Professor:', newProfessor); // Add this logging statement
         return newProfessor;
     } catch (error) {
