@@ -1,9 +1,5 @@
 const { Professores } = require('../models/models');
 
-async function getProfessorPorCurso(cursoId) {
-    // todo: implementar
-}
-
 async function getProfessores() {
     return Professores.findAll({ attributes: ['id', 'nome'] });
 }
@@ -23,8 +19,44 @@ async function getProfessoresCursos() {
     }
 }
 
+async function getProfessor(id) {
+    return Professores.findByPk(id, { attributes: ['id', 'nome'] });
+}
+
+async function addProfessor(professor) {
+    try {
+        const newProfessor = await Professores.create({ nome: professor.nome, departamento_id: professor.departamento_id });
+        console.log('New Professor:', newProfessor); // Add this logging statement
+        return newProfessor;
+    } catch (error) {
+        console.error('Error creating professor:', error);
+        throw error;
+    }
+}
+
+async function deleteProfessor(id) {
+    return Professores.destroy({ where: { id } });
+}
+
+async function editProfessor(professor) {
+    try {
+        const updatedProfessor = await Professores.findByPk(professor.id);
+        if (!updatedProfessor) {
+            throw new Error('Professor não encontrado');
+        }
+        updatedProfessor.nome = professor.nome;
+        await updatedProfessor.save();
+        return updatedProfessor;
+    } catch (error) {
+        throw new Error('Erro ao atualizar professor: ' + error.message);
+    }
+}
+
 module.exports = {
-    getProfessorPorCurso,
     getProfessores,
-    getProfessoresCursos
+    getProfessoresCursos,
+    getProfessor,
+    addProfessor,
+    deleteProfessor,
+    editProfessor
 }

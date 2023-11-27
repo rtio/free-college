@@ -14,11 +14,10 @@ router.get('/', async (req, res) => {
     res.json(await getAlunos());
 });
 
-// GET /alunos/:id
+// GET /alunos/:id/cursos
 // curl --request GET \
 //   --url http://localhost:3000/alunos/15 \
 //   --header 'User-Agent: insomnia/8.2.0'
-
 router.get('/:id/cursos', async (req, res) => {
     const id = req.params.id;
     const aluno = await getAlunoCursos(id);
@@ -30,6 +29,10 @@ router.get('/:id/cursos', async (req, res) => {
     }
 });
 
+// GET /alunos/:id
+// curl --request GET \
+//   --url http://localhost:3000/alunos/15 \
+//   --header 'User-Agent: insomnia/8.2.0'
 router.get('/:id', async (req, res) => {
     const id = req.params.id;
     const aluno = await getAluno(id);
