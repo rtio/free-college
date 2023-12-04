@@ -1,4 +1,4 @@
-const { Matriculas } = require('../models');
+const { Matriculas } = require('../models/models');
 
 async function getMatriculas() {
     return Matriculas.findAll();

@@ -1,4 +1,4 @@
-const { Departamentos } = require('../models');
+const { Departamentos } = require('../models/models');
 
 async function getDepartamentos() {
     return Departamentos.findAll();
@@ -20,13 +20,13 @@ async function deleteDepartamento(id) {
 }
 
 async function editDepartamento(departamento) {
-    const departamento = await getDepartamento(departamento.id);
-    if (!departamento) {
+    const updatedDepartamento = await getDepartamento(departamento.id);
+    if (!updatedDepartamento) {
         throw new Error('Departamento não encontrado');
     }
-    departamento.nome = departamento.nome;
-    await departamento.save();
-    return departamento;
+    updatedDepartamento.nome = updatedDepartamento.nome;
+    await updatedDepartamento.save();
+    return updatedDepartamento;
 }
 
 module.exports = {
