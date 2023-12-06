@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "admin",
+    "password": "admin",
+    "database": "free-college",
+    "host": "localhost",
+    "dialect": "mariadb"
+  },
+  "test": {
+    "username": "admin",
+    "password": "admin",
+    "database": "free-college",
+    "host": "localhost",
+    "dialect": "mariadb"
+  },
+  "production": {
+    "username": "admin",
+    "password": "admin",
+    "database": "free-college",
+    "host": "localhost",
+    "dialect": "mariadb"
+  }
+}
