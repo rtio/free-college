@@ -14,11 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Aluno.init({
-    nome: DataTypes.STRING,
+    nome: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
     email: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Aluno',
+    underscored: true,
   });
   return Aluno;
 };
