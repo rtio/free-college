@@ -1,6 +1,7 @@
 {
 	"scripts": {
-		"dev": "nodemon --inspect ./app.js"
+		"dev": "nodemon --inspect ./app.js",
+		"prod": "node ./app.js"
 	},
 	"devDependencies": {
 		"nodemon": "^3.0.1",
