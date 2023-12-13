@@ -4,20 +4,29 @@
     "password": "admin",
     "database": "free-college",
     "host": "localhost",
-    "dialect": "mariadb"
+    "dialect": "mariadb",
+    "define": {
+      "underscored": true
+    }
   },
   "test": {
     "username": "admin",
     "password": "admin",
     "database": "free-college",
     "host": "localhost",
-    "dialect": "mariadb"
+    "dialect": "mariadb",
+    "define": {
+      "underscored": true
+    }
   },
   "production": {
     "username": "admin",
     "password": "admin",
     "database": "free-college",
     "host": "localhost",
-    "dialect": "mariadb"
+    "dialect": "mariadb",
+    "define": {
+      "underscored": true
+    }
   }
 }

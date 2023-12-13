@@ -1,15 +1,15 @@
-const { Salas } = require('../models/models');
+const { Sala } = require('../models/sala');
 
 async function getSalas() {
-    return Salas.findAll();
+    return Sala.findAll();
 }
 
 async function getSala(id) {
-    return Salas.findByPk(id);
+    return Sala.findByPk(id);
 }
 
 async function addSala(sala) {
-    const newSala = await Salas.create({
+    const newSala = await Sala.create({
         numero: sala.numero,
         capacidade: sala.capacidade,
     });
@@ -17,7 +17,7 @@ async function addSala(sala) {
 }
 
 async function deleteSala(id) {
-    return Salas.destroy({ where: { id } });
+    return Sala.destroy({ where: { id } });
 }
 
 async function editSala(sala) {

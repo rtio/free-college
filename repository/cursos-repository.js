@@ -1,16 +1,18 @@
-const { Cursos, Salas, Professores } = require('../models/models');
+const { Curso } = require('../models/curso');
+const { Sala } = require('../models/sala');
+const { Professor } = require('../models/professor');
 
 async function getCursos() {
-    return Cursos.findAll({ attributes: ['id', 'nome'] });
+    return Curso.findAll({ attributes: ['id', 'nome'] });
 }
 
 async function getCurso(id) {
-    return Cursos.findByPk(id, { attributes: ['id', 'nome'] , include: [Salas, Professores]});
+    return Curso.findByPk(id, { attributes: ['id', 'nome'] , include: [Sala, Professor]});
 }
 
 async function addCurso(curso) {
     try {
-        const newCurso = await Cursos.create({
+        const newCurso = await Curso.create({
             nome: curso.nome,
             professor_id: curso.professor_id,
             sala_id: curso.sala_id,
@@ -24,12 +26,12 @@ async function addCurso(curso) {
 }
 
 async function deleteCurso(id) {
-    return Cursos.destroy({ where: { id } });
+    return Curso.destroy({ where: { id } });
 }
 
 async function editCurso(curso) {
     try {
-        const updatedCurso = await Cursos.findByPk(curso.id);
+        const updatedCurso = await Curso.findByPk(curso.id);
         if (!updatedCurso) {
             throw new Error('Curso não encontrado');
         }

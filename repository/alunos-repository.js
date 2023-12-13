@@ -1,15 +1,17 @@
-const { Alunos, Cursos } = require('../models/models');
+const { Curso } = require('../models/curso');
+const { Aluno } = require('../models/aluno');
 
 async function getAlunos() {
-  return Alunos.findAll({ attributes: ['id', 'nome', 'email'] });
+  console.log('Aluno', Aluno);
+  return Aluno.findAll();
 }
 
 async function getAlunosCursos() {
   try {
-    const alunos = await Alunos.findAll({ attributes: ['id', 'nome'] });
+    const alunos = await Aluno.findAll({ attributes: ['id', 'nome'] });
 
     for (const aluno of alunos) {
-      const matriculas = await aluno.getMatriculas({ include: Cursos });
+      const matriculas = await aluno.getMatriculas({ include: Curso });
       aluno.dataValues.matriculas = matriculas;
     }
 
@@ -21,13 +23,13 @@ async function getAlunosCursos() {
 
 async function getAlunoCursos(id) {
   try {
-    const aluno = await Alunos.findByPk(id, { attributes: ['id', 'nome'] });
+    const aluno = await Aluno.findByPk(id, { attributes: ['id', 'nome'] });
 
     if (!aluno) {
       throw new Error('Aluno não encontrado');
     }
 
-    const matriculas = await aluno.getMatriculas({ include: Cursos });
+    const matriculas = await aluno.getMatriculas({ include: Curso });
     aluno.dataValues.matriculas = matriculas;
 
     return aluno;
@@ -36,12 +38,12 @@ async function getAlunoCursos(id) {
   }
 }
 async function getAluno(id) {
-  return Alunos.findByPk(id, { attributes: ['id', 'nome', 'email'] });
+  return Aluno.findByPk(id, { attributes: ['id', 'nome', 'email'] });
 }
 
 async function addAluno(aluno) {
   try {
-    const newAluno = await Alunos.create({ nome: aluno.nome, email: aluno.email });
+    const newAluno = await Aluno.create({ nome: aluno.nome, email: aluno.email });
     console.log('New Aluno:', newAluno); // Add this logging statement
     return newAluno;
   } catch (error) {
@@ -52,12 +54,12 @@ async function addAluno(aluno) {
 
 
 async function deleteAluno(id) {
-  return Alunos.destroy({ where: { id } });
+  return Aluno.destroy({ where: { id } });
 }
 
 async function editAluno(aluno) {
   try {
-    const updatedAluno = await Alunos.findByPk(aluno.id);
+    const updatedAluno = await Aluno.findByPk(aluno.id);
 
     if (updatedAluno) {
       updatedAluno.nome = aluno.nome;
