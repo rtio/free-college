@@ -5,6 +5,10 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 072940068cb708eebc7fd5de82196d035fad0c1d
   User.init({
     name: {
       type: DataTypes.STRING,
@@ -24,5 +28,6 @@ module.exports = (sequelize, DataTypes) => {
     underscored:true,
 
   });
+
   return User;
-};
+}

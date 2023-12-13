@@ -1,22 +1,22 @@
-const { Departamentos } = require('../models/models');
+const { Departamento } = require('../models/departamento');
 
 async function getDepartamentos() {
-    return Departamentos.findAll();
+    return Departamento.findAll();
 }
 
 async function getDepartamento(id) {
-    return Departamentos.findByPk(id);
+    return Departamento.findByPk(id);
 }
 
 async function addDepartamento(departamento) {
-    const newDepartamento = await Departamentos.create({
+    const newDepartamento = await Departamento.create({
         nome: departamento.nome
     });
     return newDepartamento;
 }
 
 async function deleteDepartamento(id) {
-    return Departamentos.destroy({ where: { id } });
+    return Departamento.destroy({ where: { id } });
 }
 
 async function editDepartamento(departamento) {
