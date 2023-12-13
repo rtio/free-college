@@ -1,44 +1,41 @@
 'use strict';
 const {
-  Model
+  Model, ForeignKeyConstraintError
 } = require('sequelize');
-const { Professor, Sala } = require('.');
+
+
 module.exports = (sequelize, DataTypes) => {
   class Curso extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
+    static associate (models){
+      Curso.hasMany(models.Matricula,{
+
+        foreignkey: 'curso_id',
+        as:'matriculas'
+      });
+
+    Curso.belongsTo(models.Professor, {
+      foreignkey: 'prefessor_id',
+      as: 'professor'
+    });
+
+    Curso.belongsTo(models.Sala, {
+      foreignkey: 'sala_id',
+      as: 'Sala'
+
+    });
   }
+}
+
+    
   Curso.init({
     nome: {
         type: DataTypes.STRING(255),
         allowNull: false,
-      },
-      professor_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: Professor,
-          key: 'id',
-        },
-      },
-      sala_id: {
-        type: DataTypes.INTEGER,
-        unique: true,
-        allowNull: false,
-        references: {
-          model: Sala,
-          key: 'id',
-        },
       }
-  }, {
-    sequelize,
-    underscored: true,
-  });
-  return Curso;
-};
+    },{
+      sequelize,
+      underscored:false,
+    
+    });
+    return curso;
+  }
