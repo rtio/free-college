@@ -40,9 +40,13 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
-sequelize.sync({ force: true });
-
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-module.exports = db;
+if (process.env.CLI === 'true') {
+  module.exports.sequelize = sequelize;
+  console.log('CLI MODE');
+} else {
+  module.exports = db;
+  console.log('NOT CLI MODE');
+}
