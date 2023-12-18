@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
         as: 'matriculas'
 
       })
-
-      });
+    
+      };
 
     
   };
