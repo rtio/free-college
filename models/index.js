@@ -6,7 +6,7 @@ const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
+const config = require('../config/config.js')[env];
 const db = {};
 
 let sequelize;
@@ -17,16 +17,6 @@ if (config.use_env_variable) {
   console.log('CONFIG config: ', config);
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
-
-// sequelize = new Sequelize({
-//   dialect: 'sqlite',
-//   storage: 'database.sqlite',
-//   define: {
-//     underscored: true,
-//     createdAt: 'created_at',
-//     updatedAt: 'updated_at',
-//   }
-// });
 
 fs
   .readdirSync(__dirname)
