@@ -6,27 +6,17 @@ const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
+const config = require('../config/config.js')[env];
 const db = {};
 
 let sequelize;
-// if (config.use_env_variable) {
-//   console.log('config.use_env_variable: ', config.use_env_variable);
-//   sequelize = new Sequelize(process.env[config.use_env_variable], config);
-// } else {
-//   console.log('config: ', config);
-//   sequelize = new Sequelize(config.database, config.username, config.password, config);
-// }
-
-sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: 'database.sqlite',
-  define: {
-    underscored: true,
-    createdAt: 'created_at',
-    updatedAt: 'updated_at',
-  }
-});
+if (config.use_env_variable) {
+  console.log('CONFIG config.use_env_variable: ', config.use_env_variable);
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+} else {
+  console.log('CONFIG config: ', config);
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
+}
 
 fs
   .readdirSync(__dirname)
