@@ -1,6 +1,7 @@
 const { getAlunos, addAluno, getAluno, deleteAluno, editAluno, getAlunosCursos, getAlunoCursos } = require('../repository/alunos-repository');
 const express = require('express')
 const router = express.Router()
+const { authenticateToken } = require('../auth/util');
 
 router.get('/cursos', async (req, res) => {
     res.json(await getAlunosCursos());
@@ -54,7 +55,7 @@ router.get('/:id', async (req, res) => {
 // 	"nome": "Jack2",
 // 	"email": "jack@mail.com"
 // }'
-router.post('/', async (req, res) => {
+router.post('/', authenticateToken, async (req, res) => {
     const aluno = req.body;
     const result = await addAluno(aluno);
 
