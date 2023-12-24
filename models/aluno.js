@@ -9,8 +9,12 @@ module.exports = (sequelize, DataTypes) => {
       Aluno.hasMany(models.Matricula, {
         foreignKey: 'aluno_id',
         as: 'matriculas'
-      });
-    }
+
+      })
+    
+      };
+
+    
   };
 
   Aluno.init({

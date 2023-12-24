@@ -1,6 +1,11 @@
+<<<<<<< HEAD
+const {Cursos } = require('../models/curso');
+const {Alunos} = require('../models/aluno');
+=======
 const { Curso } = require('../models/curso');
 const { Aluno } = require('../models');
 
+>>>>>>> 072940068cb708eebc7fd5de82196d035fad0c1d
 async function getAlunos() {
   console.log('Aluno', Aluno);
   return Aluno.findAll();

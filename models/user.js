@@ -5,13 +5,13 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {}
-
   User.init({
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+
     },
-    email: {
+    email:{
       type: DataTypes.STRING,
       allowNull: false,
       unique:true,
@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    password: {
+    password:{
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -28,9 +28,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     }
-  }, {
+  },{
     sequelize,
-    underscored: true,
+    underscored:true,
+
   });
 
   return User;

@@ -8,12 +8,14 @@ module.exports = (sequelize, DataTypes) => {
 
   Departamento.init({
     nome: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-    }
+      type:DataTypes.STRING(255),
+      allowNull:false, 
+
+        }
   }, {
-    sequelize,
+    sequelize, 
     underscored: true,
+
   });
 
   return Departamento;

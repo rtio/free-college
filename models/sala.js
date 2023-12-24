@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       capacidade: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       }
   }, {

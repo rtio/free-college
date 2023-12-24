@@ -33,3 +33,6 @@ module.exports = (sequelize, DataTypes) => {
 
     return Curso;
 }
+
+
+//iopjfoieiofpods
